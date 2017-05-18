@@ -8,7 +8,7 @@ RUN yum -y update \
 	systemtap \
 	&& yum install -y python-pip mysql mysql-devel
 
-ENV OPENRESTY_VERSION 1.9.7.4
+ENV OPENRESTY_VERSION 1.11.2.3
 ENV OPENRESTY_PREFIX /opt/openresty
 ENV NGINX_PREFIX /opt/openresty/nginx
 ENV VAR_PREFIX /var/nginx
@@ -141,20 +141,6 @@ RUN  yum -y install php-devel \
 RUN echo "extension=mongodb.so" >> /usr/local/php7/lib/php.ini \	
 	&& echo "==> Finishing..."  	
 	
-#Install git
-RUN yum install -y git \
-	&& git config --global user.email "cenne1986@qq.com" \
-	&& git config --global user.name "sude"
-
-#SSH KEY Setting
-#RUN mkdir /.ssh
-#COPY sshkey.tar /root/sshkey.tar
-#RUN cd / && tar -xvf /root/sshkey.tar \
-#	&& chmod -R 700 /.ssh \
-#	&& echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config \
-#	&& echo "IdentityFile /.ssh/id_rsa" >> /etc/ssh/ssh_config \
-#	&& chown nobody:nobody -R /.ssh
-
 #Install xhprof
 RUN yum install m4 autoconf libpng graphviz -y \
   && cd /root \
@@ -170,6 +156,4 @@ RUN yum install m4 autoconf libpng graphviz -y \
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 COPY nginx.conf /opt/openresty/nginx/conf/nginx.conf
 
-
 CMD ["/config/bootstrap.sh"]
-#CMD ["nginx", "-g" ,"daemon off; error_log /dev/stderr info;"]
