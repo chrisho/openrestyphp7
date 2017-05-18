@@ -66,7 +66,7 @@ RUN cd /root \
 		libjpeg-devel libpng-devel freetype-devel \
 		bzip2 bzip2-devel gmp-devel libicu-devel readline-devel libxslt-devel \
 	&& echo "==> Downloading PHP..." \
-	&& curl -sSL http://cn2.php.net/distributions/php-7.0.8.tar.gz | tar -zxv \
+	&& curl -sSL http://php.net/distributions/php-7.0.8.tar.gz | tar -zxv \
 	&& echo "==> Configuring PHP..." \
 	&& cd php-7.0.8 \
 	&& readonly NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) \
@@ -161,4 +161,3 @@ COPY nginx.conf /opt/openresty/nginx/conf/nginx.conf
 
 
 CMD ["/config/bootstrap.sh"]
-#CMD ["nginx", "-g" ,"daemon off; error_log /dev/stderr info;"]
