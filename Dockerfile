@@ -141,6 +141,9 @@ RUN  yum -y install php-devel \
 RUN echo "extension=mongodb.so" >> /usr/local/php7/lib/php.ini \	
 	&& echo "==> Finishing..."  	
 	
+#Install git
+RUN yum install -y git 
+
 #Install xhprof
 RUN yum install m4 autoconf libpng graphviz -y \
   && cd /root \
@@ -156,4 +159,6 @@ RUN yum install m4 autoconf libpng graphviz -y \
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 COPY nginx.conf /opt/openresty/nginx/conf/nginx.conf
 
+
 CMD ["/config/bootstrap.sh"]
+#CMD ["nginx", "-g" ,"daemon off; error_log /dev/stderr info;"]
